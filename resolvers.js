@@ -1,13 +1,13 @@
-const Trip = require("../models/Trip");
+const viagem = require("./models/viagem");
 
-const tripResolvers = {
+const ViagemResolvers = {
   Query: {
-    allTrips: () => Trip.find(),
-    trip: (_, { id }) => Trip.findById(id)
+    allTrips: () => viagem.find(),
+    trip: (_, { id }) => viagem.findById(id)
   },
   Mutation: {
-    createTrip: (_, args) => Trip.create(args)
+    createTrip: (_, args) => viagem.create(args)
   }
 };
 
-module.exports = tripResolvers;
+module.exports = ViagemResolvers;
