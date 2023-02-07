@@ -1,32 +1,21 @@
-const express = require("express");
-const graphqlHTTP = require("express-graphql");
-const mongoose = require("mongoose");
-const cors = require("cors");
+import express from "express"
 
-const tripSchema = require("./graphql/schema");
-const tripResolvers = require("./graphql/resolvers");
+import { graphqlHTTP } from "express-graphql"
+import { connectionDataBase } from './db/db.js'
+import { schema } from './schema.js'
 
-const app = express();
+const app = express()
 
-app.use(cors());
+connectionDataBase()
 
-mongoose
-  .connect("mongodb://mongodb:27017/trips", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch(err => console.error(err));
+app.use(express.json())
 
 app.use(
-  "/graphql",
+  '/graphql',
   graphqlHTTP({
-    schema: tripSchema,
-    rootValue: tripResolvers,
-    graphiql: true
-  })
-);
+    schema: schema,
+    graphiql: true,
+  }),
+)
 
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(8005, () => console.log("Servidor rodando na porta 8005"))
