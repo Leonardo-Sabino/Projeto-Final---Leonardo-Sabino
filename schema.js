@@ -301,7 +301,7 @@ const TypeMutation = new GraphQLObjectType({
                   args.id,
                   {
                       bi_passageiro: args.bi_passageiro,
-                      bi_linha: args.bi_linha
+                      id_viagem: args.id_viagem
                   },
                   { new: true },
               )
